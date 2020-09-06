@@ -7,7 +7,7 @@ function setup() {
   benchmark = text('Canvas Color:', '100', '300');
   backgroundBtn = createSelect();
   backgroundBtn.position(200, 283);
-  backgroundBtn.style('font-size', '18');
+  backgroundBtn.style('font-size', '14');
   backgroundBtn.option('White');
   backgroundBtn.option('Blue');
   backgroundBtn.option('Black');
@@ -15,7 +15,7 @@ function setup() {
   text('Brush Type:', '100', '325');
   brushBtn = createSelect();
   brushBtn.position(200,308);
-  brushBtn.style('font-size', '18');
+  brushBtn.style('font-size', '14');
   brushBtn.option('Plain');
   brushBtn.option('Circle');
   brushBtn.option('Flower');
@@ -23,7 +23,7 @@ function setup() {
   text('Brush Color:', '100', '350');
   brushColorBtn = createSelect();
   brushColorBtn.position(200,333);
-  brushColorBtn.style('font-size', '18');
+  brushColorBtn.style('font-size', '14');
   brushColorBtn.option('Blue');
   brushColorBtn.option('White');
   brushColorBtn.option('Black');
@@ -84,7 +84,7 @@ function footer() {
   textSize(18);
   text('© 2018-2020 by ', '100', '520');
   home = createA("https://vjyq.github.io/en/about", "YUQING JI", "_blank");
-  home.style('font-size', '18')
+  home.style('font-size', '17');
   home.position(240, 503);
 }
 
