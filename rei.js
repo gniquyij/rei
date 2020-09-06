@@ -83,7 +83,7 @@ function brushPlain() {
 function footer() {
   textSize(18);
   text('© 2018-2020 by ', '100', '520');
-  home = createA("https://vjyq.github.io/en/about", "YUQING JI", "_blank");
+  home = createA("https://gniquyij.github.io/en/about", "YUQING JI", "_blank");
   home.style('font-size', '17');
   home.position(240, 503);
 }
