@@ -37,12 +37,12 @@ function setup() {
   screenshotBtn.position(100, 395);
   screenshotBtn.mousePressed(screenshot);
 
-  header();
   footer();
 
 }
 
 function draw() {
+  header();
   selectedCanvas = select('canvas');
   selectedCanvas.elt.style.backgroundColor = backgroundBtn.value();
   if (mouseIsPressed === true) {
@@ -88,6 +88,7 @@ function footer() {
 }
 
 function header() {
+  fill(0);
   textSize(50);
   text('rei', 100, 200);
 }
