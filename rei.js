@@ -2,40 +2,39 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
 
   textFont('Georgia');
-  textSize(15);
 
-  benchmark = text('Canvas Color:', '100', '300');
   backgroundBtn = createSelect();
-  backgroundBtn.position(200, 283);
-  backgroundBtn.style('font-size', '14');
+  backgroundBtn.position(100, 275);
+  backgroundBtn.style('width', '150');
+  backgroundBtn.option('Select Canvas Color');
   backgroundBtn.option('White');
   backgroundBtn.option('Blue');
   backgroundBtn.option('Black');
 
-  text('Brush Type:', '100', '325');
   brushBtn = createSelect();
-  brushBtn.position(200,308);
-  brushBtn.style('font-size', '14');
+  brushBtn.position(100, 305);
+  brushBtn.style('width', '150');
+  brushBtn.option('Select Brush Type');
   brushBtn.option('Plain');
   brushBtn.option('Circle');
   brushBtn.option('Flower');
 
-  text('Brush Color:', '100', '350');
   brushColorBtn = createSelect();
-  brushColorBtn.position(200,333);
-  brushColorBtn.style('font-size', '14');
+  brushColorBtn.position(100,335);
+  brushColorBtn.style('width', '150');
+  brushColorBtn.option('Select Brush Color');
   brushColorBtn.option('Blue');
   brushColorBtn.option('White');
   brushColorBtn.option('Black');
 
   resetBtn = createButton('Reset');
-  resetBtn.style('font-size', '14');
-  resetBtn.position(98, 363);
+  resetBtn.style('width', '150');
+  resetBtn.position(100, 365);
   resetBtn.mousePressed(reset);
 
   screenshotBtn = createButton('Download');
-  screenshotBtn.style('font-size', '14');
-  screenshotBtn.position(98, 397);
+  screenshotBtn.style('width', '150');
+  screenshotBtn.position(100, 395);
   screenshotBtn.mousePressed(screenshot);
 
   header();
@@ -47,9 +46,11 @@ function draw() {
   selectedCanvas = select('canvas');
   selectedCanvas.elt.style.backgroundColor = backgroundBtn.value();
   if (mouseIsPressed === true) {
-    brush = 'brush' + brushBtn.value();
-    stroke(brushColorBtn.value());
-    eval(brush).call();
+    if (brushBtn.value().search('Select') == -1 ) {
+        brush = 'brush' + brushBtn.value();
+        stroke(brushColorBtn.value());
+        eval(brush).call();
+    }
   }
 }
 
@@ -81,11 +82,9 @@ function brushPlain() {
 }
 
 function footer() {
-  textSize(18);
-  text('© 2018-2020 by ', '100', '520');
-  home = createA("https://gniquyij.github.io/en/about", "YUQING JI", "_blank");
-  home.style('font-size', '17');
-  home.position(240, 503);
+  copyright = createA("https://gniquyij.github.io/en/about", "© 2018-2020 by YUQING JI", "_blank");
+  copyright.style('font-size', '17');
+  copyright.position(100, 485);
 }
 
 function header() {
