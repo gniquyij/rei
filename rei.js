@@ -9,7 +9,7 @@ function setup() {
   backgroundBtn.position(100, 275);
   backgroundBtn.style('width', '150');
   backgroundBtn.option('Select Canvas Color');
-  backgroundBtn.option('Black');
+  backgroundBtn.option('Blue');
   backgroundBtn.option('White');
 
   brushBtn = createSelect();
@@ -24,7 +24,6 @@ function setup() {
   brushColorBtn.position(100,335);
   brushColorBtn.style('width', '150');
   brushColorBtn.option('Select Brush Color');
-  brushColorBtn.option('Black');
   brushColorBtn.option('Blue');
   brushColorBtn.option('White');
 
