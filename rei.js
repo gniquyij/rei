@@ -1,6 +1,8 @@
 function setup() {
   createCanvas(windowWidth,windowHeight);
 
+  logo = loadImage('logo.png');
+
   textFont('Georgia');
 
   backgroundBtn = createSelect();
@@ -9,7 +11,6 @@ function setup() {
   backgroundBtn.option('Select Canvas Color');
   backgroundBtn.option('White');
   backgroundBtn.option('Blue');
-  backgroundBtn.option('Black');
 
   brushBtn = createSelect();
   brushBtn.position(100, 305);
@@ -25,7 +26,6 @@ function setup() {
   brushColorBtn.option('Select Brush Color');
   brushColorBtn.option('Blue');
   brushColorBtn.option('White');
-  brushColorBtn.option('Black');
 
   resetBtn = createButton('Reset');
   resetBtn.style('width', '150');
@@ -88,9 +88,7 @@ function footer() {
 }
 
 function header() {
-  fill(0);
-  textSize(50);
-  text('rei', 100, 200);
+  image(logo, 100, 100, logo.width / 2, logo.height / 2);
 }
 
 function reset() {
