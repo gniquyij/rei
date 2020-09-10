@@ -1,7 +1,7 @@
 function setup() {
   createCanvas(windowWidth,windowHeight);
 
-  logo = loadImage('logo.png');
+  logo = loadImage('logo_v2.png');
 
   textFont('Georgia');
 
@@ -9,8 +9,8 @@ function setup() {
   backgroundBtn.position(100, 275);
   backgroundBtn.style('width', '150');
   backgroundBtn.option('Select Canvas Color');
+  backgroundBtn.option('Black');
   backgroundBtn.option('White');
-  backgroundBtn.option('Blue');
 
   brushBtn = createSelect();
   brushBtn.position(100, 305);
@@ -24,6 +24,7 @@ function setup() {
   brushColorBtn.position(100,335);
   brushColorBtn.style('width', '150');
   brushColorBtn.option('Select Brush Color');
+  brushColorBtn.option('Black');
   brushColorBtn.option('Blue');
   brushColorBtn.option('White');
 
@@ -88,7 +89,7 @@ function footer() {
 }
 
 function header() {
-  image(logo, 100, 100, logo.width / 2, logo.height / 2);
+  image(logo, 100, 120, logo.width/2, logo.height/2);
 }
 
 function reset() {
