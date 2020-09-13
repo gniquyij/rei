@@ -5,20 +5,22 @@ function setup() {
 
   textFont('Georgia');
 
-  backgroundBtn = createSelect();
-  backgroundBtn.position(100, 275);
-  backgroundBtn.style('width', '150');
-  backgroundBtn.option('Select Canvas Color');
-  backgroundBtn.option('Blue');
-  backgroundBtn.option('White');
+  canvasColor = createSelect();
+  canvasColor.position(100, 275);
+  canvasColor.style('width', '150');
+  canvasColor.option('Select Canvas Color');
+  canvasColor.option('Blue');
+  canvasColor.option('White');
 
   brushBtn = createSelect();
   brushBtn.position(100, 305);
   brushBtn.style('width', '150');
   brushBtn.option('Select Brush Type');
-  brushBtn.option('Plain');
   brushBtn.option('Circle');
-  brushBtn.option('Flower');
+  brushBtn.option('Cross');
+  brushBtn.option('Line');
+  brushBtn.option('Square');
+  brushBtn.option('Triangle');
 
   brushColorBtn = createSelect();
   brushColorBtn.position(100,335);
@@ -38,47 +40,56 @@ function setup() {
   screenshotBtn.mousePressed(screenshot);
 
   footer();
-
 }
 
 function draw() {
   header();
-  selectedCanvas = select('canvas');
-  selectedCanvas.elt.style.backgroundColor = backgroundBtn.value();
-  if (mouseIsPressed === true) {
-    if (brushBtn.value().search('Select') == -1 ) {
-        brush = 'brush' + brushBtn.value();
-        stroke(brushColorBtn.value());
-        eval(brush).call();
+  canvas = select('canvas');
+  canvas.elt.style.backgroundColor = canvasColor.value();
+  if (mouseIsPressed == true) {
+    if (brushBtn.value().search('Select') == -1 )  {
+      brush = 'brush' + brushBtn.value();
+      stroke(brushColorBtn.value());
+      eval(brush).call();
     }
   }
 }
 
 function brushCircle() {
-  variableEllipse(mouseX, mouseY, pmouseX, pmouseY);
-  function variableEllipse(x, y, px, py) {
-    let speed = abs(x - px) + abs(y - py);
-    stroke(0, 0, 255);
-    ellipse(x, y, speed, speed);
-  }
+  brushShape('circle');
 }
 
-let angle = 0;
-function brushFlower() {
-  angle += 255;
-  let val = cos(radians(angle)) * 12.0;
-  for (let a = 0; a < 360; a += 75) {
-    let xoff = cos(radians(a)) * val;
-    let yoff = sin(radians(a)) * val;
-    fill(0, 0, 255);
-    ellipse(mouseX + xoff, mouseY + yoff, val, val);
-  }
-  fill(0, 0, 255);
-  ellipse(mouseX, mouseY, 2, 2);
+function brushCross() {
+  brushShape('cross');
 }
 
-function brushPlain() {
+function brushLine() {
   line(mouseX, mouseY, pmouseX, pmouseY);
+}
+
+function brushSquare() {
+  brushShape('square');
+}
+
+function brushShape(shape, x = mouseX, y = mouseY, px = pmouseX, py = pmouseY) {
+  speed = abs(x - px) + abs(y - py);
+  if (shape == 'circle') {
+    ellipse(x, y, speed);
+  }
+  if (shape == 'cross') {
+    line(mouseX - speed, mouseY, mouseX + speed, mouseY);
+    line(mouseX, mouseY - speed, mouseX, mouseY + speed);
+  }
+  if (shape == 'square') {
+    square(mouseX, mouseY, speed);
+  }
+  if (shape == 'triangle') {
+    triangle(mouseX - speed, mouseY + speed, mouseX, mouseY, mouseX + speed, mouseY + speed);
+  }
+}
+
+function brushTriangle() {
+  brushShape('triangle');
 }
 
 function footer() {
