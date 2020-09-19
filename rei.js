@@ -6,15 +6,14 @@ function setup() {
   textFont('Georgia');
 
   canvasColorBtn = createSelect().id('canvasColorBtn');
-  canvasColorBtn.position(100, 275);
+  canvasColorBtn.position(windowWidth/10, windowHeight/3);
   canvasColorBtn.style('width', '150');
   canvasColorBtn.option('Select Canvas Color');
   canvasColorBtn.option('Blue');
   canvasColorBtn.option('White');
 
   brushTypeBtn = createSelect().id('brushTypeBtn');
-  //brushTypeBtn = createSelect();
-  brushTypeBtn.position(100, 305);
+  brushTypeBtn.position(windowWidth/10, windowHeight/3 + 30);
   brushTypeBtn.style('width', '150');
   brushTypeBtn.option('Select Brush Type');
   brushTypeBtn.option('Circle');
@@ -24,7 +23,7 @@ function setup() {
   brushTypeBtn.option('Triangle');
 
   brushColorBtn = createSelect().id('brushColorBtn');
-  brushColorBtn.position(100,335);
+  brushColorBtn.position(windowWidth/10,windowHeight/3 + 60);
   brushColorBtn.style('width', '150');
   brushColorBtn.option('Select Brush Color');
   brushColorBtn.option('Blue');
@@ -32,15 +31,13 @@ function setup() {
 
   resetBtn = createButton('Reset');
   resetBtn.style('width', '150');
-  resetBtn.position(100, 365);
+  resetBtn.position(windowWidth/10, windowHeight/3 + 90);
   resetBtn.mousePressed(reset);
 
   screenshotBtn = createButton('Download');
   screenshotBtn.style('width', '150');
-  screenshotBtn.position(100, 395);
+  screenshotBtn.position(windowWidth/10, windowHeight/3 + 120);
   screenshotBtn.mousePressed(screenshot);
-
-  footer();
   
 }
 
@@ -113,15 +110,8 @@ function brushTriangle() {
 }
 
 
-function footer() {
-  copyright = createA('https://gniquyij.github.io/en/about', '© 2018-2020 by YUQING JI', '_blank');
-  copyright.style('font-size', '17');
-  copyright.position(100, 485);
-}
-
-
 function header() {
-  image(logo, 100, 120, logo.width/2, logo.height/2);
+  image(logo, windowWidth/10, windowHeight/8, logo.width/2, logo.height/2);
 }
 
 
