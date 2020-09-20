@@ -43,59 +43,50 @@ function draw() {
     header();
     canvas = select('canvas');
     canvas.elt.style.backgroundColor = canvasColorBtn.value();
+
     selectBtnSelected('canvasColorBtn');
     selectBtnSelected('brushTypeBtn');
     selectBtnSelected('brushColorBtn');
+
     if (mouseIsPressed) {
         if (brushTypeBtn.value().search('Select') == -1)  {
-            brush = 'brush' + brushTypeBtn.value();
             stroke(brushColorBtn.value());
-            eval(brush).call();
+            let b = new brush(brushTypeBtn.value());
+            b.draw();
         }
     }
 }
 
 
-function brushCircle() {
-    brushShape('circle');
-}
-
-
-function brushCross() {
-    brushShape('cross');
-}
-
-
-function brushLine() {
-    line(mouseX, mouseY, pmouseX, pmouseY);
-}
-
-
-function brushSquare() {
-    brushShape('square');
-}
-
-
-function brushShape(shape, x = mouseX, y = mouseY, px = pmouseX, py = pmouseY) {
-    speed = abs(x - px) + abs(y - py);
-    if (shape == 'circle') {
-        ellipse(x, y, speed);
+class brush {
+    constructor(type) {
+        this.type = type;
     }
-    if (shape == 'cross') {
-        line(mouseX - speed, mouseY, mouseX + speed, mouseY);
-        line(mouseX, mouseY - speed, mouseX, mouseY + speed);
-    }
-    if (shape == 'square') {
-        square(mouseX, mouseY, speed);
-    }
-    if (shape == 'triangle') {
-        triangle(mouseX - speed, mouseY + speed, mouseX, mouseY, mouseX + speed, mouseY + speed);
-    }
-}
 
+    draw(x = mouseX, y = mouseY, px = pmouseX, py = pmouseY) {
+        let speed = abs(x - px) + abs(y - py);
 
-function brushTriangle() {
-    brushShape('triangle');
+        if (this.type == 'Circle') {
+            ellipse(x, y, speed);
+        }
+
+        if (this.type == 'Cross') {
+            line(mouseX - speed, mouseY, mouseX + speed, mouseY);
+            line(mouseX, mouseY - speed, mouseX, mouseY + speed);
+        }
+
+        if (this.type == 'Line') {
+            line(mouseX, mouseY, pmouseX, pmouseY);
+        }
+
+        if (this.type == 'Square') {
+            square(mouseX, mouseY, speed);
+        }
+
+        if (this.type == 'Triangle') {
+            triangle(mouseX - speed, mouseY + speed, mouseX, mouseY, mouseX + speed, mouseY + speed);
+        }
+    }
 }
 
 
