@@ -16,6 +16,7 @@ function setup() {
     brushTypeBtn.option('Select Brush Type');
     brushTypeBtn.option('Circle');
     brushTypeBtn.option('Cross');
+    brushTypeBtn.option('Dashed line');
     brushTypeBtn.option('Line');
     brushTypeBtn.option('Square');
     brushTypeBtn.option('Triangle');
@@ -73,6 +74,11 @@ class brush {
         if (this.type == 'Cross') {
             line(mouseX - speed, mouseY, mouseX + speed, mouseY);
             line(mouseX, mouseY - speed, mouseX, mouseY + speed);
+        }
+        
+        if (this.type == 'Dashed line') {
+            drawingContext.setLineDash([10, 10]);
+            line(mouseX, mouseY, pmouseX, pmouseY);
         }
 
         if (this.type == 'Line') {
