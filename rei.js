@@ -9,8 +9,8 @@ function setup() {
   canvasColorBtn.position(windowWidth/10, windowHeight/3);
   canvasColorBtn.style('width', '150');
   canvasColorBtn.option('Select Canvas Color');
-  canvasColorBtn.option('Blue');
   canvasColorBtn.option('White');
+  canvasColorBtn.option('Blue');
 
   brushTypeBtn = createSelect().id('brushTypeBtn');
   brushTypeBtn.position(windowWidth/10, windowHeight/3 + 30);
