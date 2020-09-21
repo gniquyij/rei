@@ -1,7 +1,7 @@
 function setup() {
     createCanvas(windowWidth,windowHeight);
 
-    logo = loadImage('logo_v2.png');
+    logo = loadImage('logo_v3.png');
 
     canvasColorBtn = createSelect().id('canvasColorBtn');
     canvasColorBtn.position(windowWidth/10, windowHeight/3);
@@ -25,6 +25,7 @@ function setup() {
     brushEffectBtn.style('width', '150');
     brushEffectBtn.option('Select Brush Effect');
     brushEffectBtn.option('Dash');
+    brushEffectBtn.option('Plain');
     brushEffectBtn.option('Speed');
 
     brushColorBtn = createSelect().id('brushColorBtn');
@@ -75,6 +76,10 @@ class brush {
     effect() {
         if (this.filter == 'Dash') {
             drawingContext.setLineDash([10, 10]);
+            this.plain();
+        }
+
+        if (this.filter == 'Plain') {
             this.plain();
         }
 
