@@ -1,7 +1,7 @@
 function setup() {
     createCanvas(windowWidth,windowHeight);
 
-    logo = loadImage('logo_v3.png');
+    logo = loadImage('logo_v4.png');
 
     canvasColorBtn = createSelect().id('canvasColorBtn');
     canvasColorBtn.position(windowWidth/10, windowHeight/3);
