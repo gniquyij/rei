@@ -1,5 +1,7 @@
 function setup() {
     createCanvas(windowWidth,windowHeight);
+    
+    document.documentElement.style.overflow='hidden';
 
     logo = loadImage('logo_v4.png');
 
