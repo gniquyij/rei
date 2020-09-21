@@ -16,13 +16,19 @@ function setup() {
     brushTypeBtn.option('Select Brush Type');
     brushTypeBtn.option('Circle');
     brushTypeBtn.option('Cross');
-    brushTypeBtn.option('Dashed line');
     brushTypeBtn.option('Line');
     brushTypeBtn.option('Square');
     brushTypeBtn.option('Triangle');
 
+    brushEffectBtn = createSelect().id('brushEffectBtn');
+    brushEffectBtn.position(windowWidth/10, windowHeight/3 + 60);
+    brushEffectBtn.style('width', '150');
+    brushEffectBtn.option('Select Brush Effect');
+    brushEffectBtn.option('Dash');
+    brushEffectBtn.option('Speed');
+
     brushColorBtn = createSelect().id('brushColorBtn');
-    brushColorBtn.position(windowWidth/10,windowHeight/3 + 60);
+    brushColorBtn.position(windowWidth/10,windowHeight/3 + 90);
     brushColorBtn.style('width', '150');
     brushColorBtn.option('Select Brush Color');
     brushColorBtn.option('Blue');
@@ -30,12 +36,12 @@ function setup() {
 
     resetBtn = createButton('Reset');
     resetBtn.style('width', '150');
-    resetBtn.position(windowWidth/10, windowHeight/3 + 90);
+    resetBtn.position(windowWidth/10, windowHeight/3 + 120);
     resetBtn.mousePressed(reset);
 
     screenshotBtn = createButton('Download');
     screenshotBtn.style('width', '150');
-    screenshotBtn.position(windowWidth/10, windowHeight/3 + 120);
+    screenshotBtn.position(windowWidth/10, windowHeight/3 + 150);
     screenshotBtn.mousePressed(screenshot);
 }
 
@@ -47,26 +53,38 @@ function draw() {
 
     selectBtnSelected('canvasColorBtn');
     selectBtnSelected('brushTypeBtn');
+    selectBtnSelected('brushEffectBtn');
     selectBtnSelected('brushColorBtn');
 
     if (mouseIsPressed) {
-        if (brushTypeBtn.value().search('Select') == -1)  {
+        if (brushTypeBtn.value().search('Select') == -1 && brushEffectBtn.value().search('Select') == -1)  {
             stroke(brushColorBtn.value());
-            let b = new brush(brushTypeBtn.value());
-            b.draw();
+            let b = new brush(brushTypeBtn.value(), brushEffectBtn.value());
+            b.effect();
         }
     }
 }
 
 
 class brush {
-    constructor(type) {
+    constructor(type, filter) {
         this.type = type;
+        this.filter = filter;
     }
 
-    draw(x = mouseX, y = mouseY, px = pmouseX, py = pmouseY) {
-        let speed = abs(x - px) + abs(y - py);
+    effect() {
+        if (this.filter == 'Dash') {
+            drawingContext.setLineDash([10, 10]);
+            this.plain();
+        }
 
+        if (this.filter == 'Speed') {
+            let speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
+            this.plain(mouseX, mouseY, pmouseX, pmouseY, speed);
+        }
+    }
+
+    plain(x=mouseX, y=mouseY, px=pmouseX, py=pmouseY, speed=100) {
         if (this.type == 'Circle') {
             ellipse(x, y, speed);
         }
@@ -74,11 +92,6 @@ class brush {
         if (this.type == 'Cross') {
             line(mouseX - speed, mouseY, mouseX + speed, mouseY);
             line(mouseX, mouseY - speed, mouseX, mouseY + speed);
-        }
-        
-        if (this.type == 'Dashed line') {
-            drawingContext.setLineDash([10, 10]);
-            line(mouseX, mouseY, pmouseX, pmouseY);
         }
 
         if (this.type == 'Line') {
