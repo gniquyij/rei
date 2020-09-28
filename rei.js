@@ -31,20 +31,33 @@ function setup() {
     brushEffectBtn.option('Speed');
 
     brushColorBtn = createSelect().id('brushColorBtn');
-    brushColorBtn.position(windowWidth/10,windowHeight/3 + 90);
+    brushColorBtn.position(windowWidth/10, windowHeight/3 + 90);
     brushColorBtn.style('width', '150');
     brushColorBtn.option('Select Brush Color');
     brushColorBtn.option('Blue');
     brushColorBtn.option('White');
 
+    filterBtn = createSelect().id('filterBtn');
+    filterBtn.position(windowWidth/10, windowHeight/3 + 120);
+    filterBtn.style('width', '150');
+    filterBtn.option('Select Filter');
+    filterBtn.option('Blur');
+    filterBtn.option('Dilate');
+    filterBtn.option('Erode');
+    filterBtn.option('Grey');
+    filterBtn.option('Invert');
+    filterBtn.option('Opaque');
+    filterBtn.option('Posterize');
+    filterBtn.option('Threshold');
+
     resetBtn = createButton('Reset');
     resetBtn.style('width', '150');
-    resetBtn.position(windowWidth/10, windowHeight/3 + 120);
+    resetBtn.position(windowWidth/10, windowHeight/3 + 150);
     resetBtn.mousePressed(reset);
 
     screenshotBtn = createButton('Download');
     screenshotBtn.style('width', '150');
-    screenshotBtn.position(windowWidth/10, windowHeight/3 + 150);
+    screenshotBtn.position(windowWidth/10, windowHeight/3 + 180);
     screenshotBtn.mousePressed(screenshot);
 }
 
@@ -58,34 +71,37 @@ function draw() {
     selectBtnSelected('brushTypeBtn');
     selectBtnSelected('brushEffectBtn');
     selectBtnSelected('brushColorBtn');
+    selectBtnSelected('filterBtn');
 
     if (mouseIsPressed) {
-        if (brushTypeBtn.value().search('Select') == -1 && brushEffectBtn.value().search('Select') == -1)  {
+        if (brushTypeBtn.value().search('Select') == -1 && brushEffectBtn.value().search('Select') == -1 && filterBtn.value().search('Select') == -1)  {
             stroke(brushColorBtn.value());
-            let b = new brush(brushTypeBtn.value(), brushEffectBtn.value());
-            b.effect();
+            let b = new reiBrush(brushTypeBtn.value(), brushEffectBtn.value());
+            b.add_effect();
+            let f = new reiFilter(filterBtn.value());
+            f.add_filter(filterBtn.value());
         }
     }
 }
 
 
-class brush {
-    constructor(type, filter) {
+class reiBrush {
+    constructor(type, effect) {
         this.type = type;
-        this.filter = filter;
+        this.effect = effect;
     }
 
-    effect() {
-        if (this.filter == 'Dash') {
+    add_effect() {
+        if (this.effect == 'Dash') {
             drawingContext.setLineDash([10, 10]);
             this.plain();
         }
 
-        if (this.filter == 'Plain') {
+        if (this.effect == 'Plain') {
             this.plain();
         }
 
-        if (this.filter == 'Speed') {
+        if (this.effect == 'Speed') {
             let speed = abs(mouseX - pmouseX) + abs(mouseY - pmouseY);
             this.plain(mouseX, mouseY, pmouseX, pmouseY, speed);
         }
@@ -111,6 +127,40 @@ class brush {
 
         if (this.type == 'Triangle') {
             triangle(mouseX - speed, mouseY + speed, mouseX, mouseY, mouseX + speed, mouseY + speed);
+        }
+    }
+}
+
+
+class reiFilter {
+    constructor(name) {
+        this.name = name;
+    }
+
+    add_filter() {
+        if (this.name == 'Blur') {
+            filter(BLUR);
+        }
+        if (this.name == 'Dilate') {
+            filter(DILATE);
+        }
+        if (this.name == 'Erode') {
+            filter(ERODE);
+        }
+        if (this.name == 'Grey') {
+            filter(GRAY);
+        }
+        if (this.name == 'Invert') {
+            filter(INVERT);
+        }
+        if (this.name == 'Opaque') {
+            filter(OPAQUE);
+        }
+        if (this.name == 'Posterize') {
+            filter(POSTERIZE);
+        }
+        if (this.name == 'Threshold') {
+            filter(THRESHOLD);
         }
     }
 }
