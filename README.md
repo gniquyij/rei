@@ -1,3 +1,3 @@
 # rei
 
-![intro](intro_20200920.mov)
+![intro](intro-20200920.gif)
